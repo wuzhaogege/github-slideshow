@@ -2,7 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     activesupport (6.0.3.6)
-      Markdown is supported.
+      Markdown is supported
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
