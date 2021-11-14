@@ -1,0 +1,73 @@
+# coding:utf-8
+import random
+from phone import Phone
+
+
+class CellPhoneNumber:
+    def __init__(self):
+        # 定义移动手机号前缀
+        self.yd = ['134', '135', '136', '137', '138', '139', '147', '150', '151', '152',
+                   '157', '158', '159', '165', '178', '182', '183', '187', '188']
+
+    def mobile(self, yds):
+        array = []  # 定义空的数组，用于储存生成的手机号
+        print('正在生成前缀是 ' + yds + ' 的手机号')
+        for i in range(10000):  # 循环50万次，获取手机号前三位以后的值
+            # a-h是随机生成的手机号后8位变量
+            a = random.randint(0, 9)
+            b = random.randint(0, 9)
+            c = random.randint(0, 9)
+            d = random.randint(0, 9)
+            e = random.randint(0, 9)
+            f = random.randint(0, 9)
+            g = random.randint(0, 9)
+            h = random.randint(0, 9)
+            # 合并所有的随机数
+            data = str(yds) + str(a) + str(b) + str(c) + str(d) + str(e) + str(f) + str(g) + str(h)
+            if data not in array:  # array里没有已存在的随机手机号，则添加到array数组里
+                array.append(data)
+            # 打印生成进度
+            if i == 2499:
+                print('前缀：' + str(yds) + ' 已生成 25%')
+            elif i == 4999:
+                print('前缀：' + str(yds) + ' 已生成 50%')
+            elif i == 7599:
+                print('前缀：' + str(yds) + ' 已生成 75%')
+            elif i == 9999:
+                print('前缀：' + str(yds) + ' 已生成 100%')
+                print('-----------------------------------------')
+        return array
+
+    def call_true(self):
+        for i in self.yd:  # 循环获取移动手机号前缀
+            data = self.mobile(i)  # 生成移动手机号
+            # print(data)
+            p = Phone()  # Phone实例化
+            true = []  # 定义空的数组，用于储存已验证的移动手机号
+            for d in data:  # 循环获取生成的移动手机号
+                city = p.find(d)  # 获取手机号的信息
+                # print(city)
+                if city != None:  # 当前手机号信息可以查到，则添加到true数组里
+                    true.append(d)
+            # 打开一个txt文件，把所有移动手机号储存到txt文本里，然后关闭文件
+            tr = open(r"C:\Users\武肇哥哥鸭\Desktop\Python\ " + str(i) + ".txt", 'w')
+            for t in true:
+                tr.write(str(t) + '\n')
+            tr.close()
+            print('前缀：' + str(i) + ' 已验证并写入txt文件')
+
+
+cell = CellPhoneNumber()
+cell.call_true()
+
+# import random
+
+# phone_first = ['139', '138', '137', '136', '135', '134', '159', '158', '157', '150', '151', '152', '188',
+#               '130', '131', '132', '156', '155',
+#               '133', '153', '189']
+
+# for i in range(100000):
+#    phone_f = random.choice(phone_first)
+#    phone_e = random.randint(10000000, 99999999)
+#    phone = str(phone_f) + str(phone_e)
+#    print(" " + phone, end="")
